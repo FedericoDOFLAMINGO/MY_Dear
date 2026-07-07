@@ -427,6 +427,8 @@
   <div class="stars" id="stars"></div>
   <div class="moon"></div>
 
+  <audio id="bgSong" src="ang.mp3" preload="auto" loop></audio>
+
   <div class="scene">
     <div class="envelope-wrap">
       <div class="envelope" id="envelope" onclick="openEnvelope()">
@@ -497,11 +499,17 @@
     const env = document.getElementById('envelope');
     const hint = document.getElementById('hint');
     const letter = document.getElementById('letter');
+    const song = document.getElementById('bgSong');
 
     if(env.classList.contains('open')) return;
 
     env.classList.add('open');
     hint.style.display='none';
+
+    if(song){
+      song.currentTime = 0;
+      song.play().catch(()=>{});
+    }
 
     setTimeout(()=>{
       letter.classList.add('show');
