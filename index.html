@@ -300,6 +300,92 @@
   }
   .hug-msg.show{ opacity:1; }
 
+  /* ---------- FOTO EN MODAL DE PANTALLA COMPLETA ---------- */
+  .photo-backdrop{
+    position:fixed;
+    inset:0;
+    background: rgba(5,3,10,0.93);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding: 24px;
+    opacity:0;
+    pointer-events:none;
+    transition: opacity .6s ease;
+    z-index:100;
+  }
+  .photo-backdrop.show{
+    opacity:1;
+    pointer-events:auto;
+  }
+
+  .photo-card{
+    position:relative;
+    width:100%;
+    max-width: 440px;
+    background: linear-gradient(180deg, #fbf3e2, #f3e6c8);
+    color:#3c2f22;
+    border-radius: 8px;
+    padding: 44px 32px 36px;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.65), 0 0 0 1px rgba(217,178,106,0.5);
+    text-align:center;
+    transform: scale(0.82) translateY(24px);
+    opacity:0;
+    transition: transform .55s cubic-bezier(.2,.8,.3,1.1), opacity .5s ease;
+  }
+  .photo-backdrop.show .photo-card{
+    transform: scale(1) translateY(0);
+    opacity:1;
+  }
+  .photo-card::before{
+    content:"";
+    position:absolute;
+    inset:10px;
+    border: 1px solid rgba(140,100,50,0.25);
+    pointer-events:none;
+  }
+  .photo-close{
+    position:absolute;
+    top:10px; right:10px;
+    width:32px; height:32px;
+    border:none;
+    background:none;
+    color:#8a6a3f;
+    font-size:20px;
+    line-height:1;
+    cursor:pointer;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition: background .2s ease;
+  }
+  .photo-close:hover{
+    background: rgba(140,100,50,0.15);
+  }
+  .photo-card img{
+    width:100%;
+    max-width: 380px;
+    border-radius: 6px;
+    box-shadow: 0 18px 40px rgba(0,0,0,0.4), 0 0 0 6px #fbf3e2, 0 0 0 7px rgba(140,100,50,0.35);
+    display:block;
+    margin: 0 auto;
+  }
+  .photo-caption{
+    margin-top: 20px;
+    font-family:'Brush Script MT', cursive;
+    font-size: 26px;
+    color:#a8546a;
+  }
+
+  .photo-support{
+    margin-top: 14px;
+    font-size: 14.5px;
+    line-height:1.6;
+    color:#6b5334;
+    font-style: italic;
+  }
+
   /* corazones que flotan por toda la pantalla */
   .hearts-fx{
     position:fixed;
@@ -349,7 +435,7 @@
         <div class="body"></div>
         <div class="seal">💌</div>
       </div>
-      <div class="hint" id="hint">toca el sobre para abrirlo, mi amor</div>
+      <div class="hint" id="hint">mi amor</div>
     </div>
 
     <div class="letter" id="letter">
@@ -359,22 +445,34 @@
       <div class="body-text">
         <p><span class="drop">N</span>o importa qué tan horrible haya sido el sueño que tuviste, ni qué tanto te haya asustado, ni cuánto haya dolido mientras dormías. Quiero que sepas algo muy simple y muy verdadero: yo estoy aquí. Siempre estoy a tu lado, despierta o dormida, en tus días buenos y en los que sientes que todo pesa un poco más.</p>
 
-        <p>Los sueños feos se quedan del otro lado de tus ojos en cuanto los abres, pero yo me quedo de este lado, contigo, sosteniendo tu mano aunque sea a la distancia. No estás sola en nada, ni en lo pequeño ni en lo grande. Cuenta conmigo para todo, mi amor.</p>
+        <p>Los sueños feos se quedan del otro lado de tus ojos en cuanto los abres, pero yo me quedo de este lado, contigo, sosteniendo tu mano aunque sea a la distancia. No estás sola en nada, ni en lo pequeño ni en lo grande. Que a pesar de que estés en sueños, mi alma y mi ser están a tu lado protegiendote y siempre apoyandote cuanod lo necesites mi princesita linda. Cuenta conmigo para todo, mi amor.</p>
 
         <div class="hearts-divider">♡ ♡ ♡</div>
 
-        <p>Te quiero muchísimo, muchooo, más de lo que estas letras pueden alcanzar a decir. Eres mi persona favorita en este mundo y en cualquier otro que se te ocurra soñar. Así que respira, princesita: hoy también vas a estar bien, porque yo voy a estar aquí para ti.</p>
+        <p>Te quiero muchísimo, muchooo, más de lo que estas letras pueden alcanzar a decir. Eres mi persona favorita en este mundo y en cualquier otro que se te ocurra soñar. Así que respira, princesita: hoy también vas a estar bien, porque yo voy a estar aquí para ti. Para todo momento que tu me sientas yo estaré a tu lado, porque yo te quiero en silencio, en voz alta, ante todo, sin dudas, con todo mi sentir con todo el amor que tengo, sin pausas, sin mentiras, con completa devoción, con toda razón, con mi completa existencia,ante todo, yo siempre te amaré aún si el amarte me costará la vida, nunca negaría todo el amor que tengo por ti, porque no hay mayor miedo y dolor para mí, que el perderte, por eso si me dijeran que si digo que te amo me costará la vida, que me quiten la vida de este plano y de mis vidas que siguen, porque yo en esta y en todas mis vidas te amaré a ti, y sólo a ti. </p>
       </div>
 
-      <p class="signature">con todo mi corazón, tu Fede</p>
+      <p class="signature">con todo mi corazón, Tu Latoso y Tontito FER</p>
 
       <div class="hug-box">
         <button class="hug-btn" id="hugBtn" onclick="sendHug()">
-          <span id="hugIcon">🫂</span>
-          <span id="hugLabel">presiona para un abrazo virtual</span>
+          <span id="hugIcon"></span>
+          <span id="hugLabel">Amor Eterno</span>
         </button>
         <p class="hug-msg" id="hugMsg"></p>
       </div>
+
+      <div class="letter-overlay"></div>
+    </div>
+
+  </div>
+
+  <div class="photo-backdrop" id="photoBackdrop" onclick="closePhotoOnBackdrop(event)">
+    <div class="photo-card" id="photoCard">
+      <button class="photo-close" onclick="closePhoto()">✕</button>
+      <img src="nosotros.jpg" alt="nosotros">
+      <p class="photo-caption">Siempre estoy contigo mi niña, siempre en tu corazón, a tu lado en todo momento, y que recuerdes que te quiero con todo lo que soy, y quiero todo lo que eres, AMO todo de ti y AMARÉ por siempre.💗</p>
+      <p class="photo-support" id="photoSupport"></p>
     </div>
   </div>
 
@@ -421,12 +519,24 @@
     "recibido: un abrazo de vuelta 💗",
     "cuenta este abrazo cuantas veces quieras"
   ];
+
+  const supportMessages = [
+    "no estás sola, yo estoy aquí para apoyarte en todo, siempre 🤍",
+    "eres muy fuerte y muy valiente, y yo voy a estar a tu lado pase lo que pase",
+    "cuenta conmigo para lo que sea, hoy y todos los días, mi amor",
+    "por más difícil que se ponga el día, aquí tienes un abrazo y todo mi apoyo",
+    "te admiro muchísimo y te quiero con todo mi corazón, princesita"
+  ];
+
   let hugIndex = 0;
+  let supportIndex = 0;
 
   function sendHug(){
     const msg = document.getElementById('hugMsg');
     const icon = document.getElementById('hugIcon');
     const fx = document.getElementById('heartsFx');
+    const backdrop = document.getElementById('photoBackdrop');
+    const support = document.getElementById('photoSupport');
 
     // texto que cambia cada vez que lo presiona
     msg.textContent = hugMessages[hugIndex % hugMessages.length];
@@ -452,6 +562,21 @@
       h.style.fontSize = (16 + Math.random()*14)+'px';
       fx.appendChild(h);
       setTimeout(()=> h.remove(), 3800);
+    }
+
+    // se oscurece la pantalla y aparece la foto con un mensajito de apoyo y amor
+    support.textContent = supportMessages[supportIndex % supportMessages.length];
+    supportIndex++;
+    backdrop.classList.add('show');
+  }
+
+  function closePhoto(){
+    document.getElementById('photoBackdrop').classList.remove('show');
+  }
+
+  function closePhotoOnBackdrop(event){
+    if(event.target.id === 'photoBackdrop'){
+      closePhoto();
     }
   }
 </script>
